@@ -71,7 +71,7 @@ As an example of the assembly process and of the aspects that might be important
 \caption{}
 \end{figure}
 
-Group 3 was the winner (highest percentage of reconstruction), despite having a lower coverage and a higher error rate, indicating that the length of the reads was very important. Without long-enough reads it was impossible to assemble sentences, going out of the repetitive regions of the text.
+Group $3$ was the winner (highest percentage of reconstruction), despite having a lower coverage and a higher error rate, indicating that the length of the reads was very important. Without long-enough reads it was impossible to assemble sentences, going out of the repetitive regions of the text.
 Knowing the characteristics of the sequence reads ('the language') might also help assembly. Eg. knowing that some sequences are just artifacts.
 
 \subsection{Merging overlapping reads}
@@ -82,7 +82,7 @@ When overlapping reads, we must maximize the length of the overlap but also accu
 \begin{itemize}
     \item they are not really contiguous (just similar sequences inside the genome). We should be able to distinguish between the two (not easy).
     \item Sequencing error/noise
-    \item Diploid genome or multiple copy genomes: sometimes sequences coming from 2 different chromosomes; they are similar but not contiguous and this increases the difficulty.
+    \item Diploid genome or multiple copy genomes: sometimes sequences coming from $2$ different chromosomes; they are similar but not contiguous and this increases the difficulty.
 \end{itemize}
 
 \subsection{Overlap graphs}
@@ -169,13 +169,13 @@ As a simple example, in the case of the DBG, this problem would be splitted into
 \end{figure}
 
 On this graph the nodes are not the reads but the k-mers present in the input reads (with k smaller that the read-length). We define the length of k-mers length in advance and create all combinations of k-mers for each read, for example for reads R1 and R2. Clearly there will be some overlap, some k-mers will be present in both sequences, but in the graph there will be only one copy of them.
-Hence, the nodes will be the \textbf{unique k-mers} present in the reads, the edges are the \textbf{overlaps} of the k-mers of length k+1 from the 2 sequences.
+Hence, the nodes will be the \textbf{unique k-mers} present in the reads, the edges are the \textbf{overlaps} of the k-mers of length k+1 from the $2$ sequences.
 Then, instead of using Hamiltonian paths touching the nodes, we use \textbf{Eulerian paths}. 
 Those are paths in which all edges are visited, each edge exactly once. From a computationally point of view, they can be found much more efficiently than Hamiltonian paths (no explosion of search space).
 Other advantages: 
 
 \begin{itemize}
-    \item if we have a k-mer of length 3, we cannot have a huge amount of nodes, but 4\textsuperscript{3} possibilities. So the set of nodes will not be too big compared to the number of reads. With k = 3 $\xrightarrow[]{}$ huge amount of overlaps hence edges. But with longer k-mers (eg. 15) there will be a good trade off between the number of nodes and the number of edges.
+    \item if we have a k-mer of length $3$, we cannot have a huge amount of nodes, but $4$\textsuperscript{3} possibilities. So the set of nodes will not be too big compared to the number of reads. With k = $3$ $\xrightarrow[]{}$ huge amount of overlaps hence edges. But with longer k-mers (eg. $15$) there will be a good trade off between the number of nodes and the number of edges.
     \item Cleaning reads: we can avoid putting in the k-mers that appear only once in a genome with a lot of coverage and are therefore the result of sequencing errors (otherwise the number of nodes would increase a lot).
     \item The de Bruijn graphs seem to be bigger sometimes, but they are not. With the de Bruijn graph the paths are more linear, there are less possibilities of wrong cycles. 
 \end{itemize}
@@ -189,18 +189,18 @@ Other advantages:
 \end{figure}
 
 Scaffolding can be done with paired-end sequencing or with the estimation of the coverage. 
-The fragment size in this case was 250 bp on average and with a Gaussian distribution like that one we can put an optimized number of Ns between the 2 contigs (not perfect, but connected). 
+The fragment size in this case was 250 bp on average and with a Gaussian distribution like that one we can put an optimized number of Ns between the $2$ contigs (not perfect, but connected). 
 Doing it for all contigs leads again to a very complex situation.
 Problems: If the end of a contig matches the middle of another one in paired-end sequencing, there might be a mistake. Either the contig must be splitted because the overlaps are wrong, or the two matches are wrong.
 
 \subsection{Evaluating assemblies}
 
 The \textbf{N50} is the size of a set of entities (e.g., contigs or scaffolds) which represents the largest entity E such that at least half of the total size of the entities is contained in entities larger than E.
-Kind of a weighted median. For example, if we have a collection of contigs with sizes 7, 4, 3, 2, 2, the N50 is 4 because. 
-(4 or more must be equal to what is 4 or less: 7+4 = 11, 4+2+2+3 = 11. Value in the middle for which the total length above and below is equal).
-Long contigs help to have a higher N50. 
-Other definition: N50 length is the length ‘x’ such that 50$\%$ of the sequence is contained in contigs of length x or greater. X must be the length of a real contigs, not just a number.
-One long read = perfect N50 but might be wrong, we might check other characteristics. Eg. we can look at what the genes are coding for (is there at least a gene that codes for ribosomes? if not, wrong).
+Kind of a weighted median. For example, if we have a collection of contigs with sizes $7$, $4$, $3$, $2$, $2$, the N$50$ is $4$ because. 
+($4$ or more must be equal to what is $4$ or less: $7$+$4$ = $11$, $4$+$2$+$2$+$3$ = $11$. Value in the middle for which the total length above and below is equal).
+Long contigs help to have a higher N$50$. 
+Other definition: N$50$ length is the length ‘x’ such that $50$\% of the sequence is contained in contigs of length x or greater. X must be the length of a real contigs, not just a number.
+One long read = perfect N$50$ but might be wrong, we might check other characteristics. Eg. we can look at what the genes are coding for (is there at least a gene that codes for ribosomes? if not, wrong).
 
 \begin{figure}[h]
 \centering
