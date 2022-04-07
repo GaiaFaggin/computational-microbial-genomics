@@ -59,7 +59,7 @@ Shotgun metagenomics is possible with \textbf{Illumina Hiseq} technology, but th
 \caption{\label{fig:Loman}}
 \end{figure}
 
- N.Loman studied why a simple alignment (with BowTie because with BLAST it is not feasible) is not enough to determine which microbial species are present in our samples. He took one \emph{E. coli} strain (K12), shredded its genome into 100 nts reads and classified these “reads” based on the best hit given by an alignment tool. Only 61\% of the reads were assigned to \emph{E. coli}. Even some Y.pestis resulted, probably because of some plasmid it has in common with \emph{E. coli} (\ref{fig:Loman}).
+ N.Loman studied why a simple alignment (with BowTie because with BLAST it is not feasible) is not enough to determine which microbial species are present in our samples. He took one \emph{E. coli} strain (K$12$), shredded its genome into $100$ nts reads and classified these “reads” based on the best hit given by an alignment tool. Only $61$\% of the reads were assigned to \emph{E. coli}. Even some \emph{Y.pestis} resulted, probably because of some plasmid it has in common with \emph{E. coli} (\ref{fig:Loman}).
  
  With a similar approach, a study identified genes belonging to all sorts of organisms in samples taken in the New York City subway. \\
 
@@ -70,7 +70,7 @@ So yes, we need some fancy technique to solve this problem. The main \textbf{cha
     \item Being able to detect both bacteria and archaea. Phages are also a problem since there is little reference
     \item Obtain relative abundances of organisms with different genome sizes: the problem is to obtain the organism abundance and not the DNA abundance
     \item Consistent detection confidence for all clades
-    \item How to handle reads as short as 50 nts
+    \item How to handle reads as short as $50$ nts
     \item Detect organisms without a sequenced genome or still unknown species. 
 \end{itemize}
 
@@ -86,7 +86,7 @@ Solution brought to you by Segata with C. Huttenhower (\href{http://segatalab.ci
 
 The idea is to find a marker gene that uniquely characterizes a species(\ref{fig:markerGene}): it has to be present in all strains of a species and in no other species. These markers are then used to form taxonomic clades. The tool that generates the database is named \textbf{ChocoPhlAn}.
 
-From a number of genomes, with ChocoPhlAn they created a database of marker genes of about 2 millions (400k are considered “most representative”) markers: the \textbf{MetaPhlAn} database. It contains about 200 markers per species. With the reduced size of this database compared with the whole genomes, it is possible to align the reads (first with BLAST, now they do it with BowTie2) directly on the markers database. 
+From a number of genomes, with ChocoPhlAn they created a database of marker genes of about $2$ millions ($400$k are considered “most representative”) markers: the \textbf{MetaPhlAn} database. It contains about $200$ markers per species. With the reduced size of this database compared with the whole genomes, it is possible to align the reads (first with BLAST, now they do it with BowTie2) directly on the markers database. 
 
 \begin{figure}[!h]
 \centering
@@ -94,11 +94,11 @@ From a number of genomes, with ChocoPhlAn they created a database of marker gene
 \caption{\label{fig:metaphlan}MetaPhlAn overview}
 \end{figure}
 
-When they first created the marker genes database, they used 2887 genomes (and half of them were drafts) that belonged to 1222 species. The number of markers per species decreases with more sequenced genomes: the core genome tends to become smaller in size and noise is eliminated as more information is available. In the current version of BioBakery (the suite containing these tools) 1 million genomes are considered, of which about 200 000 are genome isolates and 800 000 are \textbf{MAGs} (Metagenomics-Assembled Genomes → putative genomes obtained from metagenomes).
+When they first created the marker genes database, they used $2887$ genomes (and half of them were drafts) that belonged to $1222$ species. The number of markers per species decreases with more sequenced genomes: the core genome tends to become smaller in size and noise is eliminated as more information is available. In the current version of BioBakery (the suite containing these tools) $1$ million genomes are considered, of which about $200 000$ are genome isolates and $800 000$ are \textbf{MAGs} (Metagenomics-Assembled Genomes → putative genomes obtained from metagenomes).
 
-MetaPhlAn computational performance can deal with about 200 000 reads per second and  can profile thousands of microbiomes in some hours. 
+MetaPhlAn computational performance can deal with about $200 000$ reads per second and  can profile thousands of microbiomes in some hours. 
 
-\textbf{Validation with synthetic metagenomes}: 10 well-known metagenomes were created and evaluated with MetaPhlAn to check if the results correspond to the actual species of microbes used to assemble the synthetic metagenome. Errors were also added in order to simulate sequencing noise. 
+\textbf{Validation with synthetic metagenomes}: $10$ well-known metagenomes were created and evaluated with MetaPhlAn to check if the results correspond to the actual species of microbes used to assemble the synthetic metagenome. Errors were also added in order to simulate sequencing noise. 
 
 \textbf{Validation with biological methods}: comparison of the results with the ones obtained with 16S-based abundance estimation.
 
@@ -106,7 +106,7 @@ MetaPhlAn computational performance can deal with about 200 000 reads per second
 
 Microbial species that were never observed and do not have a marker in the database cannot be detected with this method.
 
-The solution is to cluster together contigs obtained from the metagenome based on coverage, GC content, codon bias, and other possible features. Strict quality controls are then performed on these putative genomes: on the number of genes and the number of known single-copy genes in order to be sure that what has been found is not a mixture of genomes. High quality putative genomes are considered MAGs and version 4 of MetaPhlAn can include them in the creation of the marker database. This way, these species can be detected in metagenomes even though they do not have a name yet.
+The solution is to cluster together contigs obtained from the metagenome based on coverage, GC content, codon bias, and other possible features. Strict quality controls are then performed on these putative genomes: on the number of genes and the number of known single-copy genes in order to be sure that what has been found is not a mixture of genomes. High quality putative genomes are considered MAGs and version $4$ of MetaPhlAn can include them in the creation of the marker database. This way, these species can be detected in metagenomes even though they do not have a name yet.
 
 \subsection{Other approaches}
 
@@ -158,7 +158,7 @@ A study published by Segata’s group collected stool samples from people having
 \caption{Taxonomic profiling of gut microbiomes}
 \end{figure}
 
-Comparing this study with similar ones performed around the world (France, China, Austria, USA, Germany and Japan) some biomarkers appeared to be reproducible (\ref{fig:biomarkers}). Moreover, an accuracy around 80\% was observed when a machine learning approach (random forest) was applied on all the datasets combined and then the model was applied on a brand new one(\ref{fig:ML}). On the other hand, when each group tried the same approach on their data separately, completely different results were found for each dataset, showing that such a technique could be valid for some cases and completely useful for others. 
+Comparing this study with similar ones performed around the world (France, China, Austria, USA, Germany and Japan) some biomarkers appeared to be reproducible (\ref{fig:biomarkers}). Moreover, an accuracy around $80$\% was observed when a machine learning approach (random forest) was applied on all the datasets combined and then the model was applied on a brand new one(\ref{fig:ML}). On the other hand, when each group tried the same approach on their data separately, completely different results were found for each dataset, showing that such a technique could be valid for some cases and completely useful for others. 
 
 \begin{figure}[!h]
 \centering
@@ -171,7 +171,7 @@ Comparing this study with similar ones performed around the world (France, China
 \begin{subfigure}{.45\textwidth}
     \centering
     \includegraphics[width=\linewidth]{CRC_ML.png}
-    \caption{\label{fig:ML}Random forest approach on all the datasets shows an accuracy of 0.80 (AUC of 1 = always right prediction, 0.5 = no prediction ability)}
+    \caption{\label{fig:ML}Random forest approach on all the datasets shows an accuracy of 0.80 (AUC of $1$ = always right prediction, $0.5$ = no prediction ability)}
 \end{subfigure}
 \caption{}
 \end{figure}
@@ -220,7 +220,7 @@ First all genes are grouped in \textbf{functional gene-families} (\ref{fig:pan1}
 \begin{figure}[!h]
 \centering
 \includegraphics[width=0.6\textwidth]{Coverage.png}
-\caption{\label{fig:pan3}\emph{E. coli} gene-family distribution: curve (A) shows the typical gene-families distribution: multi-copy genes with extremely high coverage, a plateau of single-copy genes and a tail of non-present gene-families. Curves like (C ) should be discarded from the analysis because they indicate that no \emph{E. coli} strain is detected in that sample.}
+\caption{\label{fig:pan3}\emph{E. coli} gene-family distribution: curve (A) shows the typical gene-families distribution: multi-copy genes with extremely high coverage, a plateau of single-copy genes and a tail of non-present gene-families. Curves like (C) should be discarded from the analysis because they indicate that no \emph{E. coli} strain is detected in that sample.}
 \end{figure}
 
 \subsection{Investigating population genomics thanks to PanPhlAn}
@@ -263,7 +263,7 @@ Thanks to PanPhlAn, it was possible to identify many subtypes of \emph{E.rectale
 
 \href{https://www.cell.com/cell-reports/pdf/S2211-1247(16)30256-X.pdf}{\emph{Ward et al. Cell Reports 2016}} \\
 
-\textbf{Necrotizing Enterocolitis} (NEC) is a devastating disease that affects mostly the intestines of premature infants. This study took samples from a cohort of 173 infants, 151 of them were preterm and 30 of them had NEC. They obtained 460 shotgun metagenomic samples and 284 shotgun metatranscriptomic samples, all of which were coupled with clinical data of the patients. The heatmap shows MetaPhlAn profiling of different bacterial species for all the samples: about 20\% of the patients have a high \emph{E. coli} predominance (\ref{fig:nec1}: yellow circle). PanPhlAn was employed to investigate the \emph{E. coli} strains found in these patients: of the 4 identified clades, only 2 are associated with NEC (\ref{fig:nec2}).
+\textbf{Necrotizing Enterocolitis} (NEC) is a devastating disease that affects mostly the intestines of premature infants. This study took samples from a cohort of $173$ infants, $151$ of them were preterm and $30$ of them had NEC. They obtained $460$ shotgun metagenomic samples and $284$ shotgun metatranscriptomic samples, all of which were coupled with clinical data of the patients. The heatmap shows MetaPhlAn profiling of different bacterial species for all the samples: about $20$\% of the patients have a high \emph{E. coli} predominance (\ref{fig:nec1}: yellow circle). PanPhlAn was employed to investigate the \emph{E. coli} strains found in these patients: of the $4$ identified clades, only $2$ are associated with NEC (\ref{fig:nec2}).
 
 \begin{figure}[!h]
 \centering
@@ -308,7 +308,7 @@ This approach can be applied to many different species. or \emph{E. rectale} it 
 \end{figure}
 
 This study analyzes samples of the human gut microbiome obtained from different continents. The barplots (\ref{fig:gut}) show the distances measured between results of SNPs analysis in different regions around the world. There are almost no pairs with zero or low distance and the results do not change if only subjects from the EU or US are considered.
-On the other hand, the red and blue barplots (\ref{fig:gut}) show that comparing the SNPs of samples coming from the same individual but collected 6 months apart they show great similarity. This indicates that there is some stability in the human gut microbiome: usually the strains present in one’s gut microbiome tend to remain almost the same. Nevertheless, changes of diet or other habits can bring variations in their abundances.
+On the other hand, the red and blue barplots (\ref{fig:gut}) show that comparing the SNPs of samples coming from the same individual but collected $6$ months apart they show great similarity. This indicates that there is some stability in the human gut microbiome: usually the strains present in one’s gut microbiome tend to remain almost the same. Nevertheless, changes of diet or other habits can bring variations in their abundances.
 
 \subsubsection{Identification of subspecies}
 
@@ -335,7 +335,7 @@ A great amount of information about the human is still unknown:
 \href{https://www.sciencedirect.com/science/article/pii/S0092867419300017}{\emph{Pasolli, Edoardo et al. “Extensive Unexplored Human Microbiome Diversity Revealed by Over 150,000 Genomes from Metagenomes Spanning Age, Geography, and Lifestyle.” Cell vol. 176,3 (2019}}\\
 
 This study performed a large-scale metagenomic assembly on data from uncharacterized regions of the world.
-They were able to reconstruct ~70.000 high quality genomes and ~85.000 medium-quality ones (with ~50\% completeness)\\
+They were able to reconstruct ~$70.000$ high quality genomes and ~85.000 medium-quality ones (with ~$50$\% completeness)\\
 
 \textbf{Workflow} (\ref{fig:workflow2}):
 \begin{itemize}
@@ -387,7 +387,7 @@ This was confirmed by the analysis of the microbiome found in Otzi (3.300 BC) an
 
 \href{https://genomebiology.biomedcentral.com/articles/10.1186/s13059-021-02427-7}{\emph{Karcher, N., Nigro, E., Punčochář, M. et al. Genomic diversity and ecology of human-associated \emph{Akkermansia} species in the gut microbiome revealed by extensive metagenomic assembly. Genome Biol 22, 209 (2021)}}\\
 
-Only two subspecies of \emph{Akkermansia} have been described and characterized so far: \emph{A. muciniphila} and \emph{A. glycaniphila}. In this paper, they used PhyloPhlAn3 (Segata’s tool for phylogenetic analysis) to identify 4 MAGs that are candidate \emph{Akkermansia} species. 
+Only two subspecies of \emph{Akkermansia} have been described and characterized so far: \emph{A. muciniphila} and \emph{A. glycaniphila}. In this paper, they used PhyloPhlAn3 (Segata’s tool for phylogenetic analysis) to identify $4$ MAGs that are candidate \emph{Akkermansia} species. 
 Moreover, they observed that these candidate \emph{Akkermansia} species are mutually exclusive for what concerns hosts: they were rarely found coexisting in the same sample. They also appear to have different associations in respect to \emph{A. muciniphila}: one is associated with decreased host body mass index (BMI) but the others are not (\ref{fig:akk}).
 
 \begin{figure}[!h]
@@ -404,9 +404,9 @@ Analyzing \emph{A. muciniphila} subspecies, they determined that these are host-
 
 \href{https://www.nature.com/articles/ismej2017139}{\emph{Beghini, Francesco et al. “Large-scale comparative metagenomics of \emph{Blastocystis}, a common member of the human gut microbiome.” The ISME journal vol. 11,12 (2017)}}\\
 
-They developed a pipeline to detect \emph{Blastocystis} subtypes and applied it on 12 large datasets composed of 1689 subjects of different geographic origin, disease status and lifestyle. 
+They developed a pipeline to detect \emph{Blastocystis} subtypes and applied it on $12$ large datasets composed of $1689$ subjects of different geographic origin, disease status and lifestyle. 
 
-They confirmed that \emph{Blastocystis} is a component of the healthy gut microbiome and found a higher prevalence in non-westernized individuals. Moreover, they were able to construct and functionally profile 43 new \emph{Blastocystis} genomes.
+They confirmed that \emph{Blastocystis} is a component of the healthy gut microbiome and found a higher prevalence in non-westernized individuals. Moreover, they were able to construct and functionally profile $43$ new \emph{Blastocystis} genomes.
 
 A strong association of specific microbial communities with \emph{Blastocystis} was confirmed by the high predictability of the microorganism colonization based on the species-level composition of the microbiome.   
 
